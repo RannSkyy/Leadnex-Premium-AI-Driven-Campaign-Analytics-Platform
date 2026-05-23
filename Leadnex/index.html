@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadnex | AI Campaign Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; background-color: #fdfaff; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+        }
+
+        .gradient-bg {
+            background: radial-gradient(circle at 50% -20%, #e0d7ff 0%, #fdfaff 45%);
+        }
+
+        .nav-link.active { color: #4f46e5; font-weight: 700; }
+        
+        .page-transition {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sidebar-item.active {
+            background: #4f46e5;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 10px; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-slate-900">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
+                <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-200">
+                    <i data-lucide="zap" class="w-6 h-6 fill-current"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tighter text-indigo-950">Leadnex</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-10 text-sm font-semibold text-slate-500">
+                <button onclick="showPage('home')" class="nav-link hover:text-indigo-600 transition">Home</button>
+                <button onclick="showPage('dashboard')" class="nav-link hover:text-indigo-600 transition">Dashboard</button>
+                <button onclick="showPage('about')" class="nav-link hover:text-indigo-600 transition">About Us</button>
+                <button onclick="showPage('contact')" class="nav-link hover:text-indigo-600 transition">Contact</button>
+            </div>
+
+            <button onclick="showPage('dashboard')" class="bg-indigo-600 text-white px-7 py-3 rounded-full text-sm font-bold hover:bg-indigo-700 hover:scale-105 transition-all shadow-xl shadow-indigo-100">
+                Get Started
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="pt-32 pb-20 px-6">
+        
+        <!-- PAGE: HOME -->
+        <section id="page-home" class="page-transition max-w-7xl mx-auto">
+            <div class="text-center max-w-4xl mx-auto">
+                <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-full">AI Performance Engine</span>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] text-indigo-950 mb-8">
+                    Instant AI Insights for Every <span class="text-indigo-600">Campaign Move</span>
+                </h1>
+                <p class="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12">
+                    Leadnex tracks actions, detects trends, and predicts results—making every campaign smarter and more effective than ever.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+                    <button onclick="showPage('dashboard')" class="w-full sm:w-auto bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-slate-800 transition shadow-2xl">
+                        Launch Dashboard
+                    </button>
+                    <button onclick="showPage('about')" class="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-slate-50 transition">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Mockup -->
+            <div class="mt-24 glass-card rounded-[3rem] p-4 md:p-8 scale-95 opacity-90 transition-all hover:scale-100 hover:opacity-100 border border-white/50">
+                 <div class="bg-slate-100/50 rounded-[2.5rem] h-[400px] flex items-center justify-center">
+                    <p class="text-slate-400 font-medium">Platform Preview Integration</p>
+                 </div>
+            </div>
+        </section>
+
+        <!-- PAGE: DASHBOARD (The Main UI) -->
+        <section id="page-dashboard" class="page-transition hidden max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-8 min-h-[700px]">
+                <!-- Sidebar -->
+                <div class="w-full lg:w-72 space-y-2">
+                    <button onclick="setActiveSidebar(this)" class="sidebar-item active w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition font-semibold text-left">
+                        <i data-lucide="layout-grid" class="w-5 h-5"></i> Dashboard
+                    </button>
+                    <button onclick="setActiveSidebar(this)" class="sidebar-item w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition font-semibold text-slate-500 hover:bg-white hover:text-indigo-600 text-left">
+                        <i data-lucide="megaphone" class="w-5 h-5"></i> Campaigns
+                    </button>
+                    <button onclick="setActiveSidebar(this)" class="sidebar-item w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition font-semibold text-slate-500 hover:bg-white hover:text-indigo-600 text-left">
+                        <i data-lucide="users" class="w-5 h-5"></i> Leads
+                    </button>
+                    <button onclick="setActiveSidebar(this)" class="sidebar-item w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition font-semibold text-slate-500 hover:bg-white hover:text-indigo-600 text-left">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5"></i> Insights
+                    </button>
+                    <div class="pt-10 px-6">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Account</p>
+                        <button class="w-full flex items-center gap-4 py-3 font-semibold text-slate-500 hover:text-red-500 transition text-left">
+                            <i data-lucide="log-out" class="w-5 h-5"></i> Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Dashboard View -->
+                <div class="flex-1 space-y-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <h2 class="text-3xl font-extrabold text-indigo-950">Overview Insights</h2>
+                            <p class="text-slate-500">Welcome back, your data is updated 2 mins ago.</p>
+                        </div>
+                        <button class="bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-100">
+                            <i data-lucide="plus" class="w-5 h-5"></i> Create Campaign
+                        </button>
+                    </div>
+
+                    <!-- KPI Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-card p-8 rounded-[2rem] border-l-4 border-l-indigo-500">
+                            <p class="text-slate-400 font-bold text-xs uppercase tracking-wider mb-2">Total Conversion</p>
+                            <h3 class="text-4xl font-black text-indigo-950">24.8%</h3>
+                            <div class="mt-4 text-emerald-500 font-bold text-sm flex items-center gap-1">
+                                <i data-lucide="trending-up" class="w-4 h-4"></i> +12% from last week
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-[2rem] border-l-4 border-l-purple-500">
+                            <p class="text-slate-400 font-bold text-xs uppercase tracking-wider mb-2">Active Leads</p>
+                            <h3 class="text-4xl font-black text-indigo-950">3,847</h3>
+                            <div class="mt-4 text-indigo-500 font-bold text-sm flex items-center gap-1">
+                                <i data-lucide="users" class="w-4 h-4"></i> 156 new today
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-[2rem] border-l-4 border-l-pink-500">
+                            <p class="text-slate-400 font-bold text-xs uppercase tracking-wider mb-2">Budget Spent</p>
+                            <h3 class="text-4xl font-black text-indigo-950">$12,430</h3>
+                            <div class="mt-4 text-slate-400 font-bold text-sm">Target: $20,000</div>
+                        </div>
+                    </div>
+
+                    <!-- Big Chart Placeholder -->
+                    <div class="glass-card p-8 rounded-[2.5rem] h-80 flex items-center justify-center">
+                        <div class="text-center">
+                            <i data-lucide="line-chart" class="w-12 h-12 text-indigo-200 mx-auto mb-4"></i>
+                            <p class="text-slate-400 font-semibold">Real-time Performance Chart</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: ABOUT -->
+        <section id="page-about" class="page-transition hidden max-w-5xl mx-auto text-center py-10">
+            <h2 class="text-4xl font-extrabold text-indigo-950 mb-6">Revolutionizing Data Intelligence</h2>
+            <p class="text-slate-500 text-lg leading-relaxed mb-10">
+                Leadnex lahir dari visi untuk mendemokratisasi AI bagi tim pemasaran. Kami percaya bahwa data besar tidak harus rumit. Dengan teknologi prediktif kami, kami membantu bisnis dari segala ukuran untuk mengambil keputusan yang lebih cerdas dan cepat.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="shield-check" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Secure AI</h4>
+                    <p class="text-slate-500 text-sm">Privasi data Anda adalah prioritas nomor satu kami.</p>
+                </div>
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="zap" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Fast Sync</h4>
+                    <p class="text-slate-500 text-sm">Integrasi dengan semua tool marketing Anda dalam hitungan detik.</p>
+                </div>
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Top Rated</h4>
+                    <p class="text-slate-500 text-sm">Dipercaya oleh lebih dari 500+ perusahaan global.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: CONTACT -->
+        <section id="page-contact" class="page-transition hidden max-w-4xl mx-auto">
+            <div class="glass-card rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl">
+                <div class="bg-indigo-600 p-12 text-white md:w-1/3">
+                    <h3 class="text-3xl font-bold mb-6">Get in touch</h3>
+                    <p class="text-indigo-100 mb-8">Have questions about our AI? Our team is here to help.</p>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-indigo-300"></i> hello@leadnex.ai
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-indigo-300"></i> +1 (555) 000-1234
+                        </div>
+                    </div>
+                </div>
+                <div class="p-12 md:w-2/3 bg-white">
+                    <form onsubmit="handleContact(event)" class="space-y-5">
+                        <div class="grid grid-cols-2 gap-5">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase text-slate-400">First Name</label>
+                                <input type="text" required class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase text-slate-400">Last Name</label>
+                                <input type="text" required class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase text-slate-400">Email Address</label>
+                            <input type="email" required class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase text-slate-400">How can we help?</label>
+                            <textarea rows="4" required class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-5 rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-6 py-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-slate-400 text-sm font-medium">&copy; 2024 Leadnex AI Intelligence. All rights reserved.</p>
+        <div class="flex gap-8 text-slate-400 text-sm font-semibold">
+            <a href="#" class="hover:text-indigo-600">Privacy Policy</a>
+            <a href="#" class="hover:text-indigo-600">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Page Switching Logic
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('section[id^="page-"]').forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Show selected page
+            const activePage = document.getElementById('page-' + pageId);
+            activePage.classList.remove('hidden');
+
+            // Update Nav Links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if(link.innerText.toLowerCase() === pageId) link.classList.add('active');
+            });
+
+            // Scroll to top
+            window.scrollTo(0,0);
+        }
+
+        // Sidebar Active Toggle
+        function setActiveSidebar(element) {
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('text-slate-500');
+            });
+            element.classList.add('active');
+            element.classList.remove('text-slate-500');
+        }
+
+        // Contact Form Handler
+        function handleContact(e) {
+            e.preventDefault();
+            alert("Terima kasih! Pesan Anda telah terkirim ke tim Leadnex.");
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
